@@ -15,7 +15,8 @@ var db = require('./models');
 app.use(express.static('public'));
 // body parser config to accept our datatypes
 app.use(bodyParser.urlencoded({ extended: true }));
-
+//allows us to access the controller functions
+var controllers = require('./controllers');
 
 
 ////////////////////
@@ -32,6 +33,8 @@ app.get('/', function (req, res) {
   res.sendFile('views/index.html' , { root : __dirname});
 });
 
+// lets us route to the controllers api index 
+app.get('/api', controllers.api.index);
 //
 // // // get all books
 // app.get('/api/albums', function (req, res) {
