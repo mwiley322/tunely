@@ -37,76 +37,50 @@ console.log("Sanity Check: JS is working!");
 
 $(document).ready(function() {
   console.log('app.js loaded!');
+  sampleAlbums.forEach(function (album) {
+    renderAlbum(album);
+  }); //closes foreach 
 }); //closes document ready function
 
 
 // this function takes a single album and renders it to the page
 function renderAlbum(album) {
-  console.log('rendering album:', album);
+  console.log('rendering album ', album);
+  var albumHtml = (`
+    <div class="row album">
+      <div class="col-md-10 col-md-offset-1">
+        <div class="panel panel-default">
+          <div class="panel-body">
+          <!-- begin album internal row -->
+            <div class='row'>
+              <div class="col-md-3 col-xs-12 thumbnail album-art">
+                <img src="images/800x800.png" alt="album image">
+              </div>
+              <div class="col-md-9 col-xs-12">
+                <ul class="list-group">
+                  <li class="list-group-item">
+                    <h4 class='inline-header'>Album Name:</h4>
+                    <span class='album-name'>${album.name}</span>
+                  </li>
+                  <li class="list-group-item">
+                    <h4 class='inline-header'>Artist Name:</h4>
+                    <span class='artist-name'>${album.artistName}</span>
+                  </li>
+                  <li class="list-group-item">
+                    <h4 class='inline-header'>Released date:</h4>
+                    <span class='album-releaseDate'>${album.releaseDate}</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <!-- end of album internal row -->
+            <div class='panel-footer'>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- end one album -->
+  `);
+  $('#albums').append(albumHtml);
 }
-
-// function getBookHtml(book) {
-//   return `<hr>
-//           <p>
-//             <b>${book.title}</b>
-//             by ${book.author}
-//             <button type="button" name="button" class="deleteBtn btn btn-danger pull-right" data-id=${book._id}>Delete</button>
-//           </p>`;
-// }
-
-//
-// function getAllBooksHtml(books) {
-//   return books.map(getBookHtml).join("");
-// }
-//
-// // helper function to render all posts to view
-// // note: we empty and re-render the collection each time our post data changes
-// function render () {
-//   // empty existing posts from view
-//   $booksList.empty();
-//
-//   // pass `allBooks` into the template function
-//   var booksHtml = getAllBooksHtml(allBooks);
-//
-//   // append html to the view
-//   $booksList.append(booksHtml);
-// };
-//
-// function handleSuccess(json) {
-//   allBooks = json;
-//   render();
-// }
-//
-// function handleError(e) {
-//   console.log('uh oh');
-//   $('#bookTarget').text('Failed to load books, is the server working?');
-// }
-//
-// function newBookSuccess(json) {
-//   $('#newBookForm input').val('');
-//   allBooks.push(json);
-//   render();
-// }
-//
-// function newBookError() {
-//   console.log('newbook error!');
-// }
-//
-// function deleteBookSuccess(json) {
-//   var book = json;
-//   console.log(json);
-//   var bookId = book._id;
-//   console.log('delete book', bookId);
-//   // find the book with the correct ID and remove it from our allBooks array
-//   for(var index = 0; index < allBooks.length; index++) {
-//     if(allBooks[index]._id === bookId) {
-//       allBooks.splice(index, 1);
-//       break;  // we found our book - no reason to keep searching (this is why we didn't use forEach)
-//     }
-//   }
-//   render();
-// }
-//
-// function deleteBookError() {
-//   console.log('deletebook error!');
-// }
