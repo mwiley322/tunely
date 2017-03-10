@@ -49,13 +49,25 @@ function destroy(req, res) {
       res.json(deletedAlbum);
     } //closes else statement
   });//closes findByIdAndRemove
-} //closes destroy function 
+} //closes destroy function
 
 // PUT or PATCH /api/albums/:id
 function update(req, res) {
   // find one album by id, update it based on request body,
   // and send it back as JSON
-}
+  console.log('album update: ', req.params);
+  var albumId = req.params.id; //id to search
+  var albumToUpdate = req.body; //form data to update
+  Album.findByIdAndUpdate(albumId, albumToUpdate, {new: true}, function(err, updatedAlbum) { //newtrue means that it sends back the updated version
+    if (err) {
+      console.log('err!: ', err);
+      res.sendStatus(204); //no content message
+    } else {
+      console.log(updatedAlbum);
+      res.json(updatedAlbum);
+    } //closes else statement
+  }); //closes findByIdAndUpdate
+} //closes update function
 
 module.exports = {
   index: index,
