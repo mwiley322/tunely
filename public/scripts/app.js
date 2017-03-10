@@ -1,6 +1,4 @@
 console.log("Sanity Check: JS is working!");
-var $albums;
-var allAlbums = [];
 /* CLIENT-SIDE JS
  *
  * You may edit this file as you see fit.  Try to separate different components
@@ -22,8 +20,8 @@ $(document).ready(function() {
 function renderMultipleAlbums(albums) {
   albums.forEach(function(album) {
     renderAlbum(album);
-  });
-}
+  }); //closes foreach
+}//closes rendermult.
 
 // this function takes a single album and renders it to the page
 function renderAlbum(album) {

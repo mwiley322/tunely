@@ -1,8 +1,17 @@
+//require our database models
+var db = require('../models');
+var Album = db.Album;
+
 // GET /api/albums
 function index(req, res) {
   // send back all albums as JSON
-    res.json(albums);
-}
+  Album.find({}, function(err,allAlbumsFound){
+    if(err){
+      return console.log('index err!: ', err);
+    }
+    res.json(allAlbumsFound);
+  }); //closes Album find
+}//closes index function
 
 // POST /api/albums
 function create(req, res) {

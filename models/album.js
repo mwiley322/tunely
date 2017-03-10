@@ -5,7 +5,7 @@ var Schema = mongoose.Schema;
 //our Schema to template albums
 var AlbumSchema = new Schema({
   //mongoose will add an ID automatically
-  title: String,
+  name: String,
   artistName: String,
   imageUrl: String,
   releaseDate: String,

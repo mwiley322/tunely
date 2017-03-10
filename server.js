@@ -9,8 +9,6 @@ var express = require('express'),
     bodyParser = require('body-parser');
 // generate a new express app
 var app = express();
-//require our database models
-var db = require('./models');
 // serve static files in public
 app.use(express.static('public'));
 // body parser config to accept our datatypes
