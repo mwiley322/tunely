@@ -7,12 +7,11 @@ function index(req, res) {
       {
         method: 'GET', path: '/api', description: 'Describes available endpoints'
       },
-      //TODO: fill in with endpoints from albums controller.
       {
         method: 'GET', path: '/api/albums', description: 'Gets all albums'
       },
       {
-        method: 'GET', path: '/api/albums/:id', description: 'Searches for a single album'
+        method: 'GET', path: '/api/albums/:id', description: 'gets a single album based on parameters'
       },
       {
         method: 'POST', path: '/api/albums', description: 'Cerates a single new album'

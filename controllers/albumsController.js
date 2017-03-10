@@ -6,19 +6,16 @@ var Album = db.Album;
 function index(req, res) {
   // send back all albums as JSON
   Album.find({}, function(err,allAlbumsFound){
-    if(err){
-      return console.log('index err!: ', err);
-    }
+    if (err) { return console.log('index err!: ', err); }
     res.json(allAlbumsFound);
   }); //closes Album find
 }//closes index function
 
 // POST /api/albums
 function create(req, res) {
-  var newAlbum = new db.Album(req.body);
+  var newAlbum = new Album(req.body);
   newAlbum.save(function (err, createdAlbum) {
-    if (err) {
-      console.log('IT NOT IS WORKING: ', err);
+    if (err) { console.log('err: ', err);
       res.send(err);
     }
     console.log('IT IS WORKING: ', createdAlbum);
@@ -27,17 +24,25 @@ function create(req, res) {
 }//closes create function
 
 
-// GET /api/albums/:albumId
+// GET /api/albums/:id
 function show(req, res) {
-  // find one album by id and send it back as JSON
-}
+  var albumId = req.params.id
+  console.log('album show: ', req.params);
+  Album.findById(albumId, function(err, foundAlbum) {
+    if (err) {
+      res.sendStatus(204);
+    } else {
+      res.json(foundAlbum);
+    } //closes else statement
+  }); //closes findById function
+} //closes show function
 
-// DELETE /api/albums/:albumId
+// DELETE /api/albums/:id
 function destroy(req, res) {
   // find one album by id, delete it, and send it back as JSON
 }
 
-// PUT or PATCH /api/albums/:albumId
+// PUT or PATCH /api/albums/:id
 function update(req, res) {
   // find one album by id, update it based on request body,
   // and send it back as JSON
