@@ -1,4 +1,6 @@
 console.log("Sanity Check: JS is working!");
+var $albums;
+var allAlbums = [];
 /* CLIENT-SIDE JS
  *
  * You may edit this file as you see fit.  Try to separate different components
@@ -37,11 +39,20 @@ console.log("Sanity Check: JS is working!");
 
 $(document).ready(function() {
   console.log('app.js loaded!');
-  sampleAlbums.forEach(function (album) {
-    renderAlbum(album);
-  }); //closes foreach 
+  $.ajax({
+    method: 'GET',
+    url: '/api/albums',
+    success: renderMultipleAlbums,
+    error: handleError
+  }); //closes ajax get request
 }); //closes document ready function
 
+
+function renderMultipleAlbums(albums) {
+  albums.forEach(function(album) {
+    renderAlbum(album);
+  });
+}
 
 // this function takes a single album and renders it to the page
 function renderAlbum(album) {
@@ -83,4 +94,9 @@ function renderAlbum(album) {
     <!-- end one album -->
   `);
   $('#albums').append(albumHtml);
+}
+
+function handleError(err) {
+ console.log('error loading albums!: ', err);
+ $albums.append('Sorry, there was a problem loading albums.');
 }

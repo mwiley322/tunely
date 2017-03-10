@@ -33,15 +33,12 @@ app.get('/', function (req, res) {
   res.sendFile('views/index.html' , { root : __dirname});
 });
 
-// lets us route to the controllers api index 
+// lets us route to the controllers api index
 app.get('/api', controllers.api.index);
-//
-// // // get all books
-// app.get('/api/albums', function (req, res) {
-//   // send all books as JSON response
-//   res.json(sampleAlbums);
-// }); //closes get all books function
+
+//get all albums
+app.get('/api/albums', controllers.albums.index);
 
 app.listen(process.env.PORT || 3000, function () {
-  console.log('Tunes now playing at http://localhost:3000/');
+  console.log('TUNES BLASTIN at host 3000');
 });

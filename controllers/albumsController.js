@@ -1,7 +1,5 @@
 // controllers/albumsController.js
 
-
-// controllers/albumsController.js
 var albums = [];
 albums.push({
               _id: 132,
@@ -35,6 +33,7 @@ albums.push({
 // GET /api/albums
 function index(req, res) {
   // send back all albums as JSON
+    res.json(albums);
 }
 
 // POST /api/albums
