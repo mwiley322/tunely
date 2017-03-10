@@ -14,6 +14,17 @@ $(document).ready(function() {
     success: renderMultipleAlbums,
     error: handleError
   }); //closes ajax get request
+//ADDED FORM BELOW
+  $('#album-form form').on('submit', function(e) {
+    e.preventDefault();
+    var formData = $(this).serialize(); //translates request
+    console.log('here is the form data: ', formData);
+    $.post('/api/albums', formData, function(album) {
+      console.log('album after POST', album);
+      renderAlbum(album);  //render the server's response
+    }); //closes ajax post request
+    $(this).trigger("reset");
+  }); //closes form submit function
 }); //closes document ready function
 
 
@@ -23,7 +34,7 @@ function renderMultipleAlbums(albums) {
   }); //closes foreach
 }//closes rendermult.
 
-// this function takes a single album and renders it to the page
+
 function renderAlbum(album) {
   console.log('rendering album ', album);
   var albumHtml = (`
@@ -67,5 +78,5 @@ function renderAlbum(album) {
 
 function handleError(err) {
  console.log('error loading albums!: ', err);
- $albums.append('Sorry, there was a problem loading albums.');
+ $('#albums').append('Sorry, there was a problem loading albums.');
 }
