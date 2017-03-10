@@ -40,7 +40,16 @@ function show(req, res) {
 // DELETE /api/albums/:id
 function destroy(req, res) {
   // find one album by id, delete it, and send it back as JSON
-}
+  console.log('books delete', req.params);
+  var albumId = req.params.id;
+  Album.findByIdAndRemove(albumId, function(err, deletedAlbum) {
+    if (err) {
+      console.log('err! ', err);
+    } else {
+      res.json(deletedAlbum);
+    } //closes else statement
+  });//closes findByIdAndRemove
+} //closes destroy function 
 
 // PUT or PATCH /api/albums/:id
 function update(req, res) {
