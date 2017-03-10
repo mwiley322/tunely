@@ -18,7 +18,7 @@ function create(req, res) {
     if (err) { console.log('err: ', err);
       res.send(err);
     }
-    console.log('IT IS WORKING: ', createdAlbum);
+    console.log('album created: ', createdAlbum);
     res.json(createdAlbum);
   }); //closes save function
 }//closes create function
@@ -53,8 +53,7 @@ function destroy(req, res) {
 
 // PUT or PATCH /api/albums/:id
 function update(req, res) {
-  // find one album by id, update it based on request body,
-  // and send it back as JSON
+  // find one album by id, update it based on request body,& send it back as JSON
   console.log('album update: ', req.params);
   var albumId = req.params.id; //id to search
   var albumToUpdate = req.body; //form data to update
